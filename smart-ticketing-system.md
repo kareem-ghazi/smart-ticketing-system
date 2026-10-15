@@ -33,7 +33,7 @@ graph TD
         
         subgraph AI_Services [AI Singleton Services]
             ML[PyTorch Triage Model\nClassifies: Normal or Urgent]
-            LLM[Qwen2.5-1.5B 4-bit\nDrafts Bilingual Reply]
+            LLM[5B to 7B model 4-bit\nDrafts Bilingual Reply]
         end
     end
 
@@ -83,12 +83,12 @@ ecommerce_ai_desk/
 │   │   └── schemas.py          # Pydantic validation models
 │   ├── services/
 │   │   ├── ml_service.py       # PyTorch Inference singleton class
-│   │   └── llm_service.py      # Qwen Inference (4-bit) singleton class
+│   │   └── llm_service.py      # LLM Inference (4-bit) singleton class
 │   ├── api/
 │   │   └── routes.py           # FastAPI endpoints (/api/tickets)
 │   ├── saved_models/           # Exported AI weights
 │   │   ├── triage_model.pth    # From ml_pipeline
-│   │   └── qwen-finetuned/     # From llm_pipeline
+│   │   └── llm-finetuned/     # From llm_pipeline
 │   ├── main.py                 # App entry point (lifespan model loading)
 │   └── requirements.txt
 │
@@ -135,7 +135,7 @@ ecommerce_ai_desk/
   * [ ] **Fine-Tuning Script:** Create a Jupyter Notebook or Python script using **Unsloth** to load a 7B model in 4-bit precision.
   * [ ] **LoRA Configuration:** Apply LoRA to standard attention modules to keep VRAM usage under 6GB during training.
   * [ ] **Training:** Use `SFTTrainer` to train the adapter for 1-2 epochs.
-  * [ ] **Export:** Merge the LoRA weights and save the model locally to `backend/saved_models/qwen-finetuned/`.
+  * [ ] **Export:** Merge the LoRA weights and save the model locally to `backend/saved_models/llm-finetuned/`.
 
 ## Phase 3: Software Engineering (Backend & Database)
 
@@ -174,7 +174,7 @@ ecommerce_ai_desk/
 **How to run the full stack (Instructions for the developer):**
 
 1. Train ML model and place `triage_model.pth` in `backend/saved_models/`.
-2. Train LLM and place adapter/merged model in `backend/saved_models/qwen-finetuned/`.
+2. Train LLM and place adapter/merged model in `backend/saved_models/llm-finetuned/`.
 3. Open terminal 1: `cd backend && uvicorn main:app --reload`
 4. Open terminal 2: `cd frontend && npm run dev`
 5. Access the app via `localhost:5173`
