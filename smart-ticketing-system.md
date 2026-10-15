@@ -71,7 +71,7 @@ ecommerce_ai_desk/
 │   └── requirements.txt
 │
 ├── llm_pipeline/               # Phase 2: Unsloth Fine-Tuning
-│   ├── finetune_qwen.ipynb     # Jupyter notebook for LoRA fine-tuning
+│   ├── finetune.py     # Jupyter notebook for LoRA fine-tuning
 │   └── requirements.txt
 │
 ├── backend/                    # Phase 3: FastAPI Application
