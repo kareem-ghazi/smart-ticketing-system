@@ -127,25 +127,23 @@ in evaluation mode and should not calculate gradients.
   message.
 - The backend can consume the exported artifacts without retraining.
 
-<!-- BEGIN MASTER PLAN SYNC -->
-## Master plan alignment
+## Execution status
 
-> This section is generated from [smart-ticketing-system.md](./smart-ticketing-system.md). Do not edit it directly.
-
-## Phase 1: Advanced Machine Learning (Triage Classifier)
-
-**Goal:** Train a lightweight PyTorch model to classify incoming text as `0` (Normal) or `1` (Urgent/Angry).
-
-* **Requirements & Libraries:** `torch`, `scikit-learn`, `pandas`, `numpy`, `nltk`.
-* **Datasets:**
-  * English: `IberaSoft/ecommerce-reviews-sentiment`
-  * Arabic: `Ruqiya/Arabic_Reviews_of_SHEIN`
-
-* **Tasks for AI Assistant:**
-  * [ ] **Data Preprocessing:** Write a Python script to download, balance, and merge the datasets. Map negative reviews to `1` (Urgent) and neutral/positive to `0` (Normal).
-  * [ ] **Tokenization:** Implement a simple text vectorizer (e.g., TF-IDF) or a PyTorch `nn.Embedding` layer with a vocabulary built from the training text.
-  * [ ] **Model Architecture:** Create a PyTorch class `UrgencyClassifier(nn.Module)` using a Bi-directional LSTM or GRU, ending with a linear layer for binary classification.
-  * [ ] **Training Loop:** Write the training script with CrossEntropyLoss, AdamW optimizer, and validation metrics (Accuracy, F1-Score).
-  * [ ] **Export:** Save the final trained model weights as `backend/saved_models/triage_model.pth` and the vocabulary/vectorizer.
-
-<!-- END MASTER PLAN SYNC -->
+- [x] Created the root `requirements.txt` and installed its dependencies in
+  the project `.venv`, created from the `master` Conda Python installation.
+- [x] Implemented reusable multilingual preprocessing, vocabulary, model,
+  training, and evaluation modules under `ml_pipeline/`.
+- [x] Validated Python syntax, model construction, and end-to-end training and
+  artifact export with deterministic synthetic data.
+- [x] Selected `hugginglearners/amazon-reviews-sentiment-analysis` as the
+  replacement English dataset. It contains a supported CSV with
+  `reviewText` and `overall` fields.
+- [x] Replace the placeholder in `.env` with a Hugging Face token if desired.
+  The selected datasets are public, so a token is optional unless rate limits
+  require authentication.
+- [x] Prepared deterministic train, validation, and test splits from the
+  approved English and Arabic datasets.
+- [x] Trained and exported the triage model, vocabulary, and configuration to
+  `backend/saved_models/`.
+- [x] Evaluated the exported model: overall test accuracy `0.79`, weighted F1
+  `0.79`; English accuracy `0.83`; Arabic accuracy `0.76`.

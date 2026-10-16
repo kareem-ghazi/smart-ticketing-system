@@ -1,0 +1,7 @@
+torch
+scikit-learn
+pandas
+numpy
+nltk
+datasets
+python-dotenv
