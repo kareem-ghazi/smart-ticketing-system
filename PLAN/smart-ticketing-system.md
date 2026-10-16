@@ -178,3 +178,33 @@ ecommerce_ai_desk/
 3. Open terminal 1: `cd backend && uvicorn main:app --reload`
 4. Open terminal 2: `cd frontend && npm run dev`
 5. Access the app via `localhost:5173`
+
+## Plan Synchronization
+
+`smart-ticketing-system.md` is the source of truth for the high-level phases.
+The detailed component plans contain additional implementation guidance and
+include a generated **Master plan alignment** section so new phase changes can
+be propagated without replacing that guidance.
+
+Run a one-time synchronization after editing this file:
+
+```powershell
+.\sync-plan.ps1 -Once
+```
+
+To continuously watch this file and update the component Markdown files when
+it changes, run:
+
+```powershell
+.\sync-plan.ps1
+```
+
+The watcher updates these files:
+
+- `01-triage-ml-component.md` from Phase 1.
+- `02-bilingual-llm-component.md` from Phase 2.
+- `03-backend-component.md` from Phase 3.
+- `04-frontend-and-deployment-component.md` from Phases 4 and 5.
+
+Do not edit the generated alignment sections directly; edit the relevant
+phase in this file and let the synchronizer propagate the change.
